@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div class="title">Case Converter</div>
+    <label>
+        <textarea id="texet"></textarea>
+    </label>
+    <button id="upper-case">Upper Case</button>
+    <button id="lower-case">Lower Case</button>
+    <button id="proper-case">Proper Case</button>
+    <button id="sentence-case">Sentence Case</button>
+    <button id="save-text-file">Save Text File</button>
+    <script>
+        document.getElementById("upper-case") //upper
+            .addEventListener("click",
+                function() {
+                let words = document.querySelector('textarea').value.trim().toUpperCase().split(' ');
+                document.querySelector('textarea').value = words.join(' ');
+        });
+        document.getElementById("lower-case") //lower
+            .addEventListener("click",
+                function () {
+                let words2= document.querySelector("textarea").value.trim().toLowerCase().split(" ");
+                document.querySelector("textarea").value = words2.join(" ");
+        });
+        document.getElementById("proper-case") //proper
+            .addEventListener("click",
+                function () {
+                let words3 = document.querySelector("textarea").value.trim().toLowerCase().split(" ");
+                    for (let i = 0; i < words3.length; i++) {
+                        words3[i] = words3[i].charAt(0).toUpperCase() + words3[i].slice(1);
+                    }
+                    document.querySelector('textarea').value = words3.join(" ");
+                });
+        document.getElementById("sentence-case") //sentence
+            .addEventListener("click",
+                function () {
+                    let words4 = document.querySelector("textarea").value.trim().toLowerCase().split(". ");
+                    for (let i = 0; i < words4.length; i++) {
+                        words4[i] = words4[i].charAt(0).toUpperCase() + words4[i].slice(1);
+                    }
+                    document.querySelector('textarea').value = words4.join(". ");
+                });
+        document.getElementById("save-text-file").addEventListener("click",
+            function () {
+                function download(filename, text) {
+                    let element = document.createElement('a');
+                    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+                    element.setAttribute('download', filename);
+
+                    element.style.display = 'none';
+                    document.body.appendChild(element);
+
+                    element.click();
+
+                    document.body.removeChild(element);
+                }
+
+                let text = document.getElementById('texet').value;
+                let filename = 'text.txt';
+
+                download(filename, text);
+            }, false)
+    </script>
+</body>
+</html>
